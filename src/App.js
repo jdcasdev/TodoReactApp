@@ -1,24 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import CreateTodoButton from './components/CreateTodoButton';
+import TodoCounter from './components/TodoCounter';
+import TodoItem from './components/TodoItem';
+import TodoList from './components/TodoList';
+import TodoSearch from './components/TodoSearch';
+
+const defaultTodoArray = [
+  { id: 1, text: 'Item de la lista num 1', completed: false },
+  { id: 2, text: 'Item de la lista num 2', completed: true },
+  { id: 3, text: 'Item de la lista num 3', completed: false }
+]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <TodoCounter completed={10} total={20} />
+      <TodoSearch />
+      <TodoList>
+        {defaultTodoArray.map(todoElement => (
+          <TodoItem 
+            key={ todoElement.id } 
+            completed={ todoElement.completed }
+            id={ todoElement.id }
+            text={ todoElement.text }/>
+        ))}
+      </TodoList>
+      <CreateTodoButton />
+    </React.Fragment>
   );
 }
 
