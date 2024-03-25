@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.todo-elements {
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 16px;
+  font-size: 15px;
+  overflow: hidden;
+  color: #455963;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, .3);
+}
+
+body {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 20px;
+  height: 100vh;
+  overflow: hidden;
+}
