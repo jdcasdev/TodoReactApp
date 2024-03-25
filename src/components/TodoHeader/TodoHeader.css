@@ -1,0 +1,14 @@
+.todo-header-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 20px 20px 6px 20px;
+}
+
+.todo-tools {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 0 20px;
+}

@@ -1,0 +1,22 @@
+.todo-input {
+    flex: 1;
+    font-size: 16px;
+    font-family: var(--font);
+    padding: 10px 20px;
+    border: 0;
+    box-shadow: 0 -1px 0 #e2e4ea inset;
+    color: #455963;
+}
+
+.todo-input::placeholder {
+    color: #a8b5bb;
+}
+
+.todo-input:focus {
+    box-shadow: 0 -1px 0 #bdcdd6 inset;
+}
+
+.todo-search-form {
+    display: flex;
+    margin-top: 10px;
+}
