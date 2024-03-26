@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './TodoItem.css'
 
-function TodoItem({ text, completed }) {
-  const [checked, setCheck] = useState(completed);
-
+function TodoItem(props) {
   return (
     <div className={
-      checked
+      props.completed
         ? 'todo-item is-completed'
         : 'todo-item'
     }>
       <input
         type='checkbox'
         className='todo-item-status'
-        checked={checked}
-        onChange={e => setCheck(e.target.checked) }
+        checked={props.completed}
+        onChange={props.onComplete}
       />
-      <label className='todo-item-name'>{text}</label>
-      <button className='todo-item-delete' />
+      <label className='todo-item-name'>{props.text}</label>
+      <button
+        className='todo-item-delete'
+        onClick={props.onDelete} />
     </div>
   )
 }
