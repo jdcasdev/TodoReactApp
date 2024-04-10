@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './TodoList.css';
 import TodoItem from '../TodoItem/TodoItem';
-
-const defaultTodoArray = [
-  { id: 1, text: 'Item de la lista num 1', completed: false },
-  { id: 2, text: 'Item de la lista num 2', completed: true },
-  { id: 3, text: 'Item de la lista num 3', completed: false }
-]
+import { todoContext } from '../../App';
 
 function TodoList() {
-  const [todoArray, setTodoArray] = useState(defaultTodoArray);
+  const { todoArray, setTodoArray, 
+          todoFilteredArray, setTodoFilteredArray, 
+          todoCount, setTodoCount } = React.useContext(todoContext);
 
   const completeTodo = (todoId) => {
     const newTodos = [...todoArray];
     const actualTodoIndex = newTodos.findIndex(x => x.id === todoId);
     newTodos[actualTodoIndex].completed = !newTodos[actualTodoIndex].completed;
     setTodoArray(newTodos);
+    setTodoFilteredArray(newTodos);
   }
 
   const deleteTodo = (todoId) => {
@@ -23,11 +21,13 @@ function TodoList() {
     const actualTodoIndex = newTodos.findIndex(x => x.id === todoId);
     newTodos.splice(actualTodoIndex, 1);
     setTodoArray(newTodos);
+    setTodoFilteredArray(newTodos);
+    setTodoCount(todoCount-1);
   }
 
   return (
     <div className='todo-list'>
-      {todoArray.map(todoElement => (
+      {todoFilteredArray.map(todoElement => (
         <TodoItem
           key={todoElement.id}
           id={todoElement.id}
