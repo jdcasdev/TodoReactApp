@@ -1,30 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './TodoFilter.css'
-
-const availableFilterArray = [
-    { id: 1, text: 'All' },
-    { id: 2, text: 'Active' },
-    { id: 3, text: 'Completed' }
-]
+import { todoContext } from '../../../App';
 
 function TodoFilter() {
-    const [selected, setSelected] = useState(0);
+    const { setTodoFilteredArray,
+            todoFilterArray, setTodoFilterArray, 
+            todoArray } = React.useContext(todoContext);
 
-    const clickHandler = (index) => {
-        setSelected(index);
-    };
+    const handleFilterChange = (id) => {
+        const newFilterArray = [...todoFilterArray];
+        newFilterArray.forEach(a => a.active = false);
+        const selectedFilterIndex = newFilterArray.findIndex(x => x.id === id);
+        newFilterArray[selectedFilterIndex].active = true;
+        setTodoFilterArray(newFilterArray);
+
+        switch(newFilterArray[selectedFilterIndex].text)
+        {
+            case 'All':
+                setTodoFilteredArray(todoArray);
+                break;
+            case 'Active':
+                const newTodoArray = [...todoArray].filter(a => !a.completed);
+                setTodoFilteredArray(newTodoArray);
+                break;
+            case 'Completed':
+                const completedTodoArray = [...todoArray].filter(a => a.completed);
+                setTodoFilteredArray(completedTodoArray);
+        }
+    }
 
     return (
         <div>
-            {availableFilterArray.map((item, index) => (
+            {todoFilterArray.map((item) => (
                 <button
                     id={item.id}
                     className={
-                        selected === index
+                        item.active
                             ? 'todo-filter is-active'
                             : 'todo-filter'
                     }
-                    onClick={() => clickHandler(index)}
+                    onClick={() => handleFilterChange(item.id)}
                 >
                     {item.text}
                 </button>
