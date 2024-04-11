@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './TodoSearch.css';
 import TodoCreateButton from '../CreateTodoButton/CreateTodoButton';
-import { UserContext } from '../../App';
+import { todoContext } from '../../App';
 
 function TodoSearch() {
-  const { todoInput, setTodoInput } = React.useContext(UserContext);
+  const { todoInput, setTodoInput, 
+          todoArray, setTodoArray, 
+          todoCount, setTodoCount} = React.useContext(todoContext);
 
   const handleInputChange = (event) => {
     setTodoInput(event.target.value);
@@ -13,7 +15,11 @@ function TodoSearch() {
   const handleEnterKeyDown = (event) => {
     if (event.key === 'Enter' && todoInput.trim() !== '')
     {
-      setTodoInput('');
+      const lastTodo = todoArray[todoArray.length - 1];
+      const formatedTodo = { id: lastTodo == undefined ? 1 : lastTodo.id+1, text: todoInput, completed: false }
+      const newArray = [...todoArray, formatedTodo];
+      setTodoArray(newArray);
+      setTodoCount(todoCount+1);
     }
   }
 
